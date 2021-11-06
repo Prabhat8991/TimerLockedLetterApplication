@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/letterListFragment">
+
+    <fragment
+        android:id="@+id/letterListFragment"
+        android:name="com.example.letterapplication.letterlist.LetterListFragment"
+        android:label="Letters" >
+        <action
+            android:id="@+id/action_letterListFragment_to_addLetterFragment"
+            app:destination="@id/addLetterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addLetterFragment"
+        android:name="com.example.letterapplication.addletter.AddLetterFragment"
+        android:label="Add a new letter"
+        tools:layout="@layout/fragment_add_letter" />
+</navigation>
