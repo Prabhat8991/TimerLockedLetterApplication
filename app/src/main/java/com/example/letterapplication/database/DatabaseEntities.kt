@@ -27,7 +27,8 @@ fun List<DatabaseLetterModel>.asUiModel(): List<LetterUIModel> {
     LetterUIModel(
       title = it.title,
       description = it.description,
-      timeStamp = it.timeStamp
+      timeStamp = it.timeStamp,
+      lockStatus = it.isLocked
     )
   }
 }

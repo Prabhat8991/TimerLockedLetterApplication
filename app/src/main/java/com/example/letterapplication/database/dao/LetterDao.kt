@@ -15,8 +15,8 @@ interface LetterDao {
     fun getLetter(): LiveData<List<DatabaseLetterModel>>
 
     @Insert(onConflict = REPLACE)
-    fun insertAll(databaseLetterModel: DatabaseLetterModel): Long
+    suspend fun insertAll(databaseLetterModel: DatabaseLetterModel): Long
 
     @Query("UPDATE letter_db SET isLocked = :isLocked WHERE id =:id")
-    fun update(isLocked: Boolean, id: Int)
+    suspend fun update(isLocked: Boolean, id: Int)
 }

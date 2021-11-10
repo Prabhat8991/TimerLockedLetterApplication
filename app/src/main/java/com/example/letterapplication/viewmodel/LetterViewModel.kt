@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.letterapplication.database.DatabaseLetterModel
+import com.example.letterapplication.model.LetterUIModel
 import com.example.letterapplication.repository.LetterRepository
+import com.example.letterapplication.repository.LetterRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -20,6 +22,10 @@ class LetterViewModel @Inject constructor(
 
   val nextId: LiveData<Long>
   get() = _nextId
+
+  val letters = (letterRepository as LetterRepositoryImpl).letters
+
+  val updatedLetters: MutableLiveData<List<LetterUIModel>> =  (letterRepository as LetterRepositoryImpl).updatedLetters
 
   fun saveLetters(letterModel: DatabaseLetterModel) {
     var nextId: Long = 0

@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.letterapplication.R
 import com.example.letterapplication.addletter.TimePickerFragment.Companion.HOUR_OF_DAY
 import com.example.letterapplication.addletter.TimePickerFragment.Companion.MINUTE
 import com.example.letterapplication.database.DatabaseLetterModel
@@ -25,7 +27,7 @@ class AddLetterFragment : Fragment(), FragmentResultListener {
 
     val letterViewModel: LetterViewModel by activityViewModels<LetterViewModel>()
     private lateinit var binding: FragmentAddLetterBinding
-    private lateinit var calendar: Calendar
+    private var calendar: Calendar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +39,11 @@ class AddLetterFragment : Fragment(), FragmentResultListener {
             showTimePickerDialog()
         }
         letterViewModel.nextId.observe(viewLifecycleOwner, {
-            setAlarm(calendar, it)
+            calendar?.let {cal ->
+                setAlarm(cal, it)
+            }
         })
+
         return binding.root
     }
 
@@ -60,7 +65,7 @@ class AddLetterFragment : Fragment(), FragmentResultListener {
 
         }
         calendar = calSet
-        letterViewModel.saveLetters(DatabaseLetterModel(isLocked = true, title = binding.letterTitleEditText.text.toString(), description = binding.letterDescriptionEditText.text.toString(), timeStamp = calendar.timeInMillis))
+        letterViewModel.saveLetters(DatabaseLetterModel(isLocked = true, title = binding.letterTitleEditText.text.toString(), description = binding.letterDescriptionEditText.text.toString(), timeStamp = calendar?.timeInMillis?:0))
     }
 
     private fun setAlarm(calendar: Calendar, nextId: Long) {
@@ -70,6 +75,7 @@ class AddLetterFragment : Fragment(), FragmentResultListener {
         val pendingIntent = PendingIntent.getBroadcast(requireActivity(), nextId.toInt(), intent, 0)
         val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+        findNavController().navigate(R.id.action_addLetterFragment_to_letterListFragment)
     }
 
     companion object {

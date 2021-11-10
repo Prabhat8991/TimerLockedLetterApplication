@@ -12,10 +12,31 @@
         <action
             android:id="@+id/action_letterListFragment_to_addLetterFragment"
             app:destination="@id/addLetterFragment" />
+        <action
+            android:id="@+id/action_letterListFragment_to_letterDetailFragment"
+            app:destination="@id/letterDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addLetterFragment"
         android:name="com.example.letterapplication.addletter.AddLetterFragment"
         android:label="Add a new letter"
-        tools:layout="@layout/fragment_add_letter" />
+        tools:layout="@layout/fragment_add_letter" >
+        <action
+            android:id="@+id/action_addLetterFragment_to_letterListFragment"
+            app:destination="@id/letterListFragment"
+            app:popUpTo="@id/addLetterFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/letterDetailFragment"
+        android:name="com.example.letterapplication.letterdetails.LetterDetailFragment"
+        android:label="Letter Detail"
+        tools:layout="@layout/fragment_letter_detail" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+    </fragment>
 </navigation>
