@@ -12,7 +12,7 @@ import dagger.hilt.components.SingletonComponent
 
 @InstallIn(SingletonComponent::class)
 @Module
-abstract class DatabaseModule {
+object DatabaseModule {
     @Provides
     fun provideLetterDao(letterDatabase: LetterDatabase): LetterDao {
         return letterDatabase.LetterDao()

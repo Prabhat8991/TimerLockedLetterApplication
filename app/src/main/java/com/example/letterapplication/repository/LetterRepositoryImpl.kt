@@ -16,9 +16,15 @@ class LetterRepositoryImpl @Inject constructor(private val letterDatabase: Lette
         it.asUiModel()
     }
 
-    override suspend fun saveLetter(letterModel: DatabaseLetterModel) {
-     withContext(Dispatchers.IO) {
-         letterDatabase.LetterDao().insertAll(letterModel)
-     }
+    override suspend fun saveLetter(letterModel: DatabaseLetterModel): Long {
+        return withContext(Dispatchers.IO) {
+            letterDatabase.LetterDao().insertAll(letterModel)
+        }
+    }
+
+    override suspend fun updateLetter(isLocked: Boolean, id: Int) {
+        return withContext(Dispatchers.IO) {
+            letterDatabase.LetterDao().update(false, id)
+        }
     }
 }

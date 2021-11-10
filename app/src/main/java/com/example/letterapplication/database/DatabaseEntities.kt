@@ -11,13 +11,13 @@ import com.example.letterapplication.model.LetterUIModel
   tableName = "letter_db"
 )
 data class DatabaseLetterModel (
-  @PrimaryKey(autoGenerate = true) val id: Int,
+  @PrimaryKey(autoGenerate = true) val id: Int = 0,
   val isLocked: Boolean,
   val title: String,
   val description: String,
-  val timeStamp: String
+  val timeStamp: Long
 )
-@Database(entities = [DatabaseLetterModel::class], version = 1)
+@Database(entities = [DatabaseLetterModel::class], version = 1, exportSchema = false)
 abstract class LetterDatabase: RoomDatabase() {
   abstract fun LetterDao(): LetterDao
 }

@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
+import androidx.room.Update
 import com.example.letterapplication.database.DatabaseLetterModel
 import kotlinx.coroutines.flow.Flow
 
@@ -14,5 +15,8 @@ interface LetterDao {
     fun getLetter(): LiveData<List<DatabaseLetterModel>>
 
     @Insert(onConflict = REPLACE)
-    fun insertAll(vararg databaseLetterModel: DatabaseLetterModel)
+    fun insertAll(databaseLetterModel: DatabaseLetterModel): Long
+
+    @Query("UPDATE letter_db SET isLocked = :isLocked WHERE id =:id")
+    fun update(isLocked: Boolean, id: Int)
 }
