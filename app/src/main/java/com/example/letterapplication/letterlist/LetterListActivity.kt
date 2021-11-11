@@ -24,6 +24,7 @@ class LetterListActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+        binding.floatingActionButton.visibility = View.VISIBLE
         binding.floatingActionButton.setOnClickListener {
             navController.navigate(R.id.action_letterListFragment_to_addLetterFragment)
             it.visibility = View.GONE
