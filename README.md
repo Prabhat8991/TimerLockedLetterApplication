@@ -10,6 +10,8 @@ This uses following android components:
 6. Room DB
 7. Mvvm architecture
 
+Please note: Check out master branch
+
 
 ![image](https://user-images.githubusercontent.com/16200985/141282619-c8efac47-b4ba-457f-ac83-b53bd6ad9eab.png)
 
