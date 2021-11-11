@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_letterListFragment_to_letterDetailFragment"
             app:destination="@id/letterDetailFragment" />
+        <action
+            android:id="@+id/action_letterListFragment_to_preferenceFragment"
+            app:destination="@id/preferenceFragment" />
     </fragment>
     <fragment
         android:id="@+id/addLetterFragment"
@@ -39,4 +42,8 @@
             android:name="description"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/preferenceFragment"
+        android:name="com.example.letterapplication.settings.PreferenceFragment"
+        android:label="PreferenceFragment" />
 </navigation>
